@@ -1,6 +1,7 @@
 from flask import render_template
 from. import main
-from ..models import User
+from ..models import User, Pitch
+from .forms import PitchForm
 from .. import db
 
 @main.route('/')
@@ -11,5 +12,6 @@ def index():
     title = 'Pitchez'
 
     return render_template('auth/login.html', title = title)
+
 
 
