@@ -6,7 +6,7 @@ class Config:
     """
     SECRET_KEY = os.environ.get('SECRET KEY')
     SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://pasaris:maisiewilliams7@localhost/pitchez'
-    SQLALHEMY_TRACK_MODIFICATIONS = False
+    SQLALCHEMY_TRACK_MODIFICATIONS = False
 
 class ProdConfig(Config):
     """

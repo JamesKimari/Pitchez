@@ -1,1 +1,1 @@
-SECRET_KEY = 'nexttimemseeh'
+SECRET_KEY='nexttimemseeh'
