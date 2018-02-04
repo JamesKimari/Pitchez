@@ -1,4 +1,6 @@
-{% extends 'base.html' %} {% block body %}
+{% extends 'base.html' %}
+{% import 'bootstrap/wtf.html' as wtf %}
+{% block body %}
 <div class="container">
     {{wtf.quick_form(registration_form)}}
 </div>
