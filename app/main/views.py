@@ -10,6 +10,6 @@ def index():
     """
     title = 'Pitchez'
 
-    return render_template('index.html', title = title)
+    return render_template('auth/login.html', title = title)
 
 
