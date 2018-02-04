@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+            <h3>{{user.username| capitalize}}</h3>
+
+            {% if user.bio %}
+            <p>{{user.bio}}</p>
+            {% else %}
+            <p>{{user.username| capitalize}} has no bio</p>
+            {% endif %}
+
+            {% if user == current_user %}
+            <a href="{{url_for('main.update_profile', uname = user.username)}}">Edit Profile</a>
+            {% endif %}
+            
+        </div>
+        <div class="col-md-4">
+            {% if user.profile_pic_path %}
+            <img src="{{url_for('static', filename = user.profile_pic_path)}}" alt="" class="img-thumnail">
+            {% else %}
+            <p>No profile picture</p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+{% endblock %}

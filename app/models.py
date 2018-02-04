@@ -28,7 +28,7 @@ class User(UserMixin, db.Model):
         self.password_lock = generate_password_hash(password)
 
     def verify_password(self, password):
-        return check_password_hash(self.pass_secure, password)
+        return check_password_hash(self.password_lock, password)
 
     def __repr__(self):
         return f'User {self.username}'
