@@ -12,12 +12,12 @@ class User(UserMixin, db.Model):
     __tablename__ = 'users'
 
     id = db.Column(db.Integer, primary_key = True)
-    username = db.Column(db.String(255))
+    username = db.Column(db.String(255), index = True)
     email = db.Column(db.String(255), unique = True, index = True)
     bio = db.Column(db.String(255))
     profile_pic_path = db.Column(db.String)
     pitches = db.relationship('Pitch', backref = 'user', lazy = 'dynamic')
-    password_lock = db.Column(db.String(255))
+    password_hash = db.Column(db.String(255))
 
     @property
     def password(self):
@@ -25,31 +25,22 @@ class User(UserMixin, db.Model):
 
     @password.setter
     def password(self, password):
-        self.password_lock = generate_password_hash(password)
+        self.password_hash = generate_password_hash(password)
 
     def verify_password(self, password):
-        return check_password_hash(self.password_lock, password)
+        return check_password_hash(self.password_hash, password)
 
     def __repr__(self):
         return f'User {self.username}'
-
-class Category(db.Model):
-    __tablename__ = 'categories'
-
-    id = db.Column(db.Integer, primary_key = True)
-    name = db.Column(db.String(255))
-    pitches = db.relationship('Pitch', backref = 'category', lazy = 'dynamic')
-
-    def __repr__(self):
-        return f'Pitch {self.name}'
 
 class Pitch(db.Model):
     __tablename__ = 'pitches'
 
     id = db.Column(db.Integer, primary_key = True)
+    title = db.Column(db.String(255))
     pitch_content = db.Column(db.String())
+    category = db.Column(db.String(255))
     upvote = db.Column(db.Integer)
     downvote = db.Column(db.Integer)
-    published_at = db.Column(db.DateTime, default = datetime.utcnow)
-    category_id = db.Column(db.Integer, db.ForeignKey('categories.id'))
+    published_at = db.Column(db.DateTime, default = datetime.utcnow)    
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
