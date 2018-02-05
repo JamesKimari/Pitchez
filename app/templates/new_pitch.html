@@ -3,7 +3,29 @@
 {% block body %}
 
 <div class="container">
-    {{wtf.quick_form(pitch_form)}}
-</div>
+    <form action method="post" action="form" role="form">
+      <div class="row mt-3">
+        {{pitch_form.title.label}}
+      </div>
+      <div class="row">
+        {{pitch_form.hidden_tag()}} {{pitch_form.title(class_='form-control', placeholder="Enter Pitch Title")}}        
+      </div>
+      <div class="row mt-3">
+        {{pitch_form.category.label}}
+      </div>
+      <div class="row">
+        {{pitch_form.hidden_tag()}} {{pitch_form.category(class_='form-control', placeholder="Category")}}
+      </div>
+      <div class="row mt-3">
+        {{pitch_form.pitch_content.label}}
+      </div>
+      <div class="row">
+        {{pitch_form.hidden_tag()}} {{pitch_form.pitch_content(class_='form-control', placeholder="Write Pitch")}}
+      </div>     
+      <div class="row mt-3">
+          {{pitch_form.hidden_tag()}}
+          {{pitch_form.submit(class_="btn btn-outline-primary")}}
+    </form>
+  </div>
 
 {% endblock %}
