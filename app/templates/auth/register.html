@@ -1,7 +1,37 @@
 {% extends 'base.html' %}
-{% import 'bootstrap/wtf.html' as wtf %}
+
 {% block body %}
+
 <div class="container">
-    {{wtf.quick_form(registration_form)}}
+  <form action method="post" action="form" role="form">
+    <div class="row mt-3">
+      {{registration_form.email.label}}
+    </div>
+    <div class="row">
+      {{registration_form.hidden_tag()}} {{registration_form.email(class_='form-control', placeholder="Enter email")}}
+      <small id="emailHelp" class="form-text text-muted">Well never share your email with anyone else.</small>
+    </div>
+    <div class="row mt-3">
+      {{registration_form.username.label}}
+    </div>
+    <div class="row">
+      {{registration_form.hidden_tag()}} {{registration_form.username(class_='form-control', placeholder="Username")}}
+    </div>
+    <div class="row mt-3">
+      {{registration_form.password.label}}
+    </div>
+    <div class="row">
+      {{registration_form.hidden_tag()}} {{registration_form.password(class_='form-control', placeholder="Password")}}
+    </div>
+    <div class="row mt-3">
+      {{registration_form.password_confirm.label}}
+    </div>
+    <div class="row">
+      {{registration_form.hidden_tag()}} {{registration_form.password_confirm(class_='form-control', placeholder="Confirm Password")}}
+    </div>
+    <div class="row mt-3">
+        {{registration_form.hidden_tag()}}
+        {{registration_form.submit(class_="btn btn-outline-primary")}}
+  </form>
 </div>
 {% endblock %}
