@@ -53,6 +53,3 @@ class Pitch(db.Model):
     published_at = db.Column(db.DateTime, default = datetime.utcnow)
     category_id = db.Column(db.Integer, db.ForeignKey('categories.id'))
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
-
-
-    

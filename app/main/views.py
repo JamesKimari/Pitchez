@@ -55,6 +55,12 @@ def update_pic(uname):
 
     return redirect(url_for('main.profile', uname = uname))
 
+# @main.route('pitch/new/<int:id>', method = ['GET', 'POST'])
+# @login_required
+# def new_pitch(id):
+#     form = PitchForm()
+#     pitch = 
+
 
 
         
