@@ -1,19 +1,39 @@
-{% macro displayPitchList(pitch_list) %} 
+{% macro displayPitchList(pitch_list) %} {% for pitch in pitch_list %}
 
-{% for pitch in pitch_list %}
-<div class="col-md-4 col-sm-4 col-xs-4">
+<div class="col-md-3 col-sm-6 col-xs-6" id = 'pitch'>
     <div class="card">
-        <div class="card-header">
-            Category - {{pitch.category}}
-        </div>
+        <div class="card-header">{{pitch.category}}</div>
         <div class="card-body">
-            <h5 class="card-title"></h5>
-            <p class="card-text">{{pitch.title}}</p>
-            <p class="card-text">{{pitch.pitch_content}}</p>
+            <h5 class="card-title">{{pitch.id}}. {{pitch.title}}</h5>
+            <p class="card-text"><i>{{pitch.pitch_content}}</i></p>
+        </div>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">{{pitch.author}}</li>
+            <li class="list-group-item">{{pitch.published_at}}</li>
+        </ul>
+        <div class="card-body">
+            <a href="#" class="card-link">Card link</a>
+            <a href="#" class="card-link">Another link</a>
         </div>
     </div>
 </div>
 
-{% endfor %}
+<style>
+    .card-body {
+        padding: 1em 1em 1em 1em;
+    }
 
-{% endmacro %}
+    .card-header {
+        background-color: deepskyblue;
+    }
+
+    .card {
+        box-shadow: 3px 6px rgba(211, 211, 211, 0.3);
+    }
+
+    #pitch {
+        padding-bottom: 1em;        
+    }
+</style>
+
+{% endfor %} {% endmacro %}

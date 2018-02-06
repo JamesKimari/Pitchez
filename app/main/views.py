@@ -6,6 +6,7 @@ from flask_login import login_required, current_user
 from .. import db, photos
 
 @main.route('/')
+@login_required
 def index():
     """
     View root page function that returns the index page and its data
@@ -59,17 +60,14 @@ def update_pic(uname):
 @main.route('/login/pitch/new_pitch', methods = ['GET','POST'])
 @login_required
 def new_pitch():
-    pitch_form = PitchForm()
-    title = 'New Pitch'
+    pitch_form = PitchForm()    
 
     if pitch_form.validate_on_submit():
-        pitch = Pitch(title = pitch_form.title.data, category = pitch_form.category.data, pitch_content = pitch_form.pitch_content.data)
-        
+        pitch = Pitch(title = pitch_form.title.data, category = pitch_form.category.data, pitch_content = pitch_form.pitch_content.data, author = pitch_form.author.data)
 
         db.session.add(pitch)
         db.session.commit() 
         
         return redirect(url_for('main.index'))
-
     
-    return render_template('new_pitch.html', title = title, pitch_form = pitch_form)    
+    return render_template('new_pitch.html', pitch_form = pitch_form)    

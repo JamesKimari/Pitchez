@@ -4,13 +4,10 @@
 
 {% block body %}
 
-<h1>Welcome to Pitchez</h1>
+<a href="{{url_for('main.new_pitch')}}">Create a new Pitch</a>
 
-<div class="container-fluid">
-    <div class="row">
+    <div style="margin-top: 1em;" class="row">
         {{macro.displayPitchList(pitches)}}
     </div>
-</div>
-<a href="{{url_for('main.new_pitch')}}">Create a new Pitch</a>
 
 {% endblock %}
