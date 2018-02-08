@@ -1,39 +1,156 @@
-{% extends 'base.html' %}
+{% extends 'base.html' %} {% block body %}
 
-{% block body %}
-<div class="container">
-    <div class="row">
-        <div class="col-md-4">
-            <h3>{{user.username| capitalize}}</h3>
+<style>
+    @media screen and (max-width: 1920px) and (min-width: 769px) {
 
-            {% if user.bio %}
-            <p>{{user.bio}}</p>
-            {% else %}
-            <p>{{user.username| capitalize}} has no bio</p>
-            {% endif %}
+        input {
+            background-color: #337ab7;
+            border: 1px solid #337ab7;
+            color: white;
+            border-radius: 3px;
+            margin-top: 1%;
+            margin-top: 4%;
+        }
 
-            {% if user == current_user %}
-            <a href="{{url_for('main.update_profile', uname = user.username)}}">Edit Profile</a>
-            {% endif %}
-            
-        </div>
-        <div class="col-md-4">
-            {% if user.profile_pic_path %}
+        #column_two {
+            border-left: 1px solid rgba(60, 179, 113, 0.3);
+            margin-left: 8%;
+            padding-left: 5%;
+        }
 
-            <img src="{{url_for('static', filename = user.profile_pic_path)}}" alt="" class="img-thumbnail img-responsive">
+        #column_two a {
+            color: mediumseagreen;
+        }
+        .container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 3.5%;
+            height: 60%;
+            width: 50%;
+            background-color: white;
+            box-shadow: 4px 6px rgba(211, 211, 211, 0.3);
+        }
 
-            {% else %}
+        .container-fluid {
+            position: absolute;
+            background: whitesmoke;
+            padding-top: 10%;
+            height: 96%;
+            width: 100%;
 
-            <p>No profile picture</p>
+        }
 
-            {% endif %}
+        .btn {
+            background-color: white;
+            border: 1px solid dodgerblue;
+            color: dodgerblue;
+            margin-top: 3.5%;
+        }
+    }
 
-            {% if user == current_user %}
-            <form action="{{url_for('main.update_pic', uname = user.username)}}" method = 'post' enctype = 'multipart/form-data'>
-            <input type="file" name="photo" class="form-control" required>
-            <input type="submit">
-            </form>
-            {% endif %}
+    @media screen and (max-width: 1920px) and (min-width: 1240px) {
+
+        .container-fluid {
+            height: 90.9%;
+            padding-top: 4%;
+        }       
+
+    }
+
+    @media screen and (max-width: 1240px) and (min-width: 769px) {
+
+        .container-fluid {
+            height: 90.9%;
+            padding-top: 10%;
+        }
+
+        .container {
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            height: 80%;
+            width: 70%;
+        }
+
+    }
+
+    @media screen and (max-width: 768px) and (min-width: 320px) {
+
+        input {
+            background-color: #337ab7;
+            border: 1px solid #337ab7;
+            color: white;
+            border-radius: 3px;
+            margin-top: 1%;
+            margin-top: 4%;
+        }
+
+        #column_two {
+            border-left: 1px solid rgba(60, 179, 113, 0.3);
+            margin-left: 8%;
+            padding-left: 5%;
+        }
+
+        #column_two a {
+            color: mediumseagreen;
+        }
+
+        .container {
+            position: absolute;
+            padding: 3%;
+            height: 50%;
+            margin-left: 5%;
+            width: 80%;
+            background-color: white;
+            box-shadow: 4px 6px rgba(211, 211, 211, 0.3);
+        }
+
+        .container-fluid {
+            position: absolute;
+            padding-top: 20%;
+            height: 96%;
+            width: 100%;
+
+        }
+
+        .btn {
+            background-color: white;
+            border: 1px solid dodgerblue;
+            color: dodgerblue;
+            margin: 3.5% 0%;
+        }
+    }
+</style>
+
+<div class="container-fluid">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 col-sm-4 col-xs-4">
+                {% if user.profile_pic_path %}
+
+                <img src="{{url_for('static', filename = user.profile_pic_path)}}" alt="" class="img-thumbnail img-responsive"> {% else %}
+
+                <img src="{{url_for('static', filename = 'imgs/avatar.png')}}" alt="" class="img-thumbnail img-responsive"> {% endif %} {% if user == current_user %}
+                <form action="{{url_for('main.update_pic', uname = user.username)}}" method='post' enctype='multipart/form-data'>
+                    <input type="file" name="photo" class="form-control" required>
+                    <input type="submit">
+                </form>
+                {% endif %}
+            </div>
+
+            <div class="col-md-6 col-sm-6 col-xs-6" id="column_two">
+                <h3>{{user.username| capitalize}}</h3>
+
+                {% if user.bio %}
+                <p>{{user.bio}}</p>
+                {% else %}
+                <p>{{user.username| capitalize}} has no bio</p>
+                {% endif %} {% if user == current_user %}
+                <a href="{{url_for('main.update_profile', uname = user.username)}}">Edit Profile</a>
+                {% endif %}
+            </div>
         </div>
     </div>
 </div>

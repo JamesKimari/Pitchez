@@ -1,38 +1,101 @@
-{% extends 'base.html' %}
+{% extends 'base.html' %} {% import 'bootstrap/wtf.html' as wtf %} {% block body %}
 
-{% block body %}
+<style>
+  @media screen and (max-width: 1920px) and (min-width: 769px) {
 
-<div class="container">
-  <form action method="post" action="form" role="form">
-    <div class="row mt-3">
-      {{registration_form.email.label}}
-    </div>
-    <div class="row">
-      {{registration_form.hidden_tag()}} {{registration_form.email(class_='form-control', placeholder="Enter email")}}
-      <small id="emailHelp" class="form-text text-muted">Well never share your email with anyone else.</small>
-    </div>
-    <div class="row mt-3">
-      {{registration_form.username.label}}
-    </div>
-    <div class="row">
-      {{registration_form.hidden_tag()}} {{registration_form.username(class_='form-control', placeholder="Username")}}
-    </div>
-    <div class="row mt-3">
-      {{registration_form.password.label}}
-    </div>
-    <div class="row">
-      {{registration_form.hidden_tag()}} {{registration_form.password(class_='form-control', placeholder="Password")}}
-    </div>
-    <div class="row mt-3">
-      {{registration_form.password_confirm.label}}
-    </div>
-    <div class="row">
-      {{registration_form.hidden_tag()}} {{registration_form.password_confirm(class_='form-control', placeholder="Confirm Password")}}
-    </div>
-    <div class="row mt-3">
-        {{registration_form.hidden_tag()}}
-        {{registration_form.submit(class_="btn btn-outline-primary")}}
-    </div>
-  </form>
+    .container {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      padding: 3.5%;
+      height: 80%;
+      width: 55%;
+      background-color: white;
+      box-shadow: 4px 6px rgba(211, 211, 211, 0.3);
+    }
+
+    .container-fluid {
+      position: absolute;
+      padding-top: 10%;
+      height: 96%;
+      width: 100%;
+      background-color: whitesmoke;
+      background-size: cover;
+
+    }
+
+    .btn {
+      background-color: white;
+      border: 1px solid dodgerblue;
+      color: dodgerblue;
+    }
+  }
+
+  @media screen and (max-width: 1920px) and (min-width: 1240px) {
+
+    .container-fluid {
+      height: 90.9%;
+      padding-top: 4%;
+    }
+
+  }
+
+  @media screen and (max-width: 1240px) and (min-width: 769px) {
+
+    .container-fluid {
+      height: 90.9%;
+      padding-top: 10%;
+    }
+
+    .container {
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      height: 80%;
+      width: 70%;
+    }
+
+  }
+
+   @media screen and (max-width: 768px) and (min-width: 320px) {
+
+    .container {
+      position: absolute;
+      padding: 3.5%;
+      margin-left: 5%;
+      height: 80%;
+      width: 80%;
+
+    }
+
+    .container-fluid {
+      position: absolute;
+      padding-top: 10%;
+      height: 96%;
+      width: 100%;
+
+    }
+
+    .btn {
+      background-color: white;
+      border: 1px solid dodgerblue;
+      color: dodgerblue;
+      margin: 3.5% 0%;
+    }
+  }
+
+</style>
+
+
+<div class="container-fluid">
+
+  <div class="container">
+
+    {{wtf.quick_form(registration_form)}}
+
+  </div>
+
 </div>
+
 {% endblock %}
