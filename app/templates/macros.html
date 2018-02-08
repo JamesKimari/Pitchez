@@ -1,25 +1,5 @@
 {% macro displayPitchList(pitch_list) %} {% for pitch in pitch_list %}
 
-<div class="col-md-3 col-sm-6 col-xs-6" id='pitch'>
-    <div class="card">
-        <div class="card-header">{{pitch.category}}</div>
-        <div class="card-body">
-            <h5 class="card-title" style="color: rgba(0, 0, 0, 0.7);">{{pitch.title}}</h5>
-            <p class="card-text" style="color: rgb(73, 72, 72);">
-                <i>{{pitch.pitch_content}}</i>
-            </p>
-        </div>
-        <ul class="list-group list-group-flush">
-            <li class="list-group-item" style="font-size: 14px; color: dodgerblue;">~ {{pitch.author}}<a href=""><span class="fas fa-thumbs-up"></span></a>&ensp;<a href=""><span class="fas fa-thumbs-down"></span></a>&ensp;<a href=""><span class="fas fa-comments"></span></a>    
-            </li>
-            <li class="list-group-item">{{pitch.published_at}}</li>
-            <li class="list-group-item" style="background-color: whitesmoke;">
-                <a href="{{url_for('main.new_pitch')}}" class="new_pitch">
-                    <span id = "new_pitch">Click here to create a new Pitch<span></a></li>
-        </ul>
-    </div>
-</div>
-
 <style>
     .card-body {
         padding: 1em 1em 1em 1em;
@@ -38,8 +18,8 @@
     }
 
     .fa-thumbs-up {
-        border: 1px solid dodgerblue;  
-        padding: 2px;     
+        border: 1px solid dodgerblue;
+        padding: 2px;
         font-size: 18px;
         border-radius: 5px;
         margin-left: 2em;
@@ -66,10 +46,65 @@
         color: hotpink;
     }
 
-   .new_pitch:hover {
-        text-decoration-color: dodgerblue;        
+    .new_pitch:hover {
+        text-decoration-color: dodgerblue;
     }
-    
+
+</style>
+
+<div class="col-md-3 col-sm-6 col-xs-6" id='pitch'>
+    <div class="card">
+        <div class="card-header" style="color: white
+        ;">
+            <b>{{pitch.category}}</b>
+        </div>
+        <div class="card-body">
+            <h5 class="card-title" style="color: rgba(0, 0, 0, 0.7);">{{pitch.title}}</h5>
+            <p class="card-text" style="color: rgb(73, 72, 72);">
+                <i>{{pitch.pitch_content}}</i>
+            </p>
+        </div>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item" style="font-size: 14px; color: dodgerblue;">~ {{pitch.author}}
+                <a href="">
+                    <span class="fas fa-thumbs-up"></span>
+                </a>&ensp;
+                <a href="">
+                    <span class="fas fa-thumbs-down"></span>
+                </a>&ensp;
+                <a href="{{url_for('main.comments')}}">
+                    <span class="fas fa-comments"></span>
+                </a>
+            </li>
+            <li class="list-group-item">{{pitch.published_at}}</li>
+            <li class="list-group-item" style="background-color: whitesmoke;">
+                <a href="{{url_for('main.new_pitch')}}" class="new_pitch">
+                    <span id="new_pitch">Click to create a new Pitch
+                        <span>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+{% endfor %} {% endmacro %} 
+
+{% macro displayCommentsList(comments_list) %} {% for comment in comments_list %}
+
+<div class="container">
+
+    {{comment.body}}
+
+</div><br>
+
+<style>
+    .container {
+        background-color: #0e91a6; 
+        padding: 3.5% 5%; 
+        margin-left: 3%;
+        border-radius: 10px;
+        color: whitesmoke;
+    }
 </style>
 
 {% endfor %} {% endmacro %}

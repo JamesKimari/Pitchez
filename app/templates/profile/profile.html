@@ -163,7 +163,7 @@
                 {% if user.bio %}
                 <p>{{user.bio}}</p>
                 {% else %}
-                <p>{{user.username| capitalize}} has no bio</p>
+                <p>{{user.username| capitalize}} joined Pitchez</p>
                 {% endif %} {% if user == current_user %}
                 <a href="{{url_for('main.update_profile', uname = user.username)}}">Edit Profile</a>
 

@@ -16,14 +16,13 @@ class ProdConfig(Config):
     pass
 
 class TestConfig(Config):
-#    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://pasaris:maisiewilliams7@localhost/pitchez_test' 
-    pass
+   SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://pasaris:maisiewilliams7@localhost/pitchez_test' 
+
 
 class DevConfig(Config):
     """
     Development config child class
     """
-
     SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://pasaris:maisiewilliams7@localhost/pitchez'
 
     DEBUG = True

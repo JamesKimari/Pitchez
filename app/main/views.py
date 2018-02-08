@@ -1,6 +1,6 @@
 from flask import render_template, request, redirect, url_for, abort
 from . import main
-from ..models import User, Pitch
+from ..models import User, Pitch, Comment
 from .forms import PitchForm, UpdateProfile, CommentsForm
 from flask_login import login_required, current_user
 from .. import db, photos
@@ -61,7 +61,7 @@ def update_pic(uname):
 
     return redirect(url_for('main.profile', uname = uname))
 
-@main.route('/login/pitch/new_pitch', methods = ['GET','POST'])
+@main.route('/pitch/new_pitch', methods = ['GET','POST'])
 @login_required
 def new_pitch():
     pitch_form = PitchForm()    
@@ -76,21 +76,20 @@ def new_pitch():
     
     return render_template('new_pitch.html', pitch_form = pitch_form)   
 
-@main.route('/login/user/<uname>/comments', methods = ['GET', 'POST'])
+@main.route('/pitch/comments', methods = ['GET', 'POST'])
 @login_required
-def comments(uname):
-    user = User.query.filter_by(username = uname).first()
-    if user is None:
-        abort(404)
+def comments():    
+    comments_form = CommentsForm() 
+    comments = Comment.query.all()    
 
-    form = UpdateProfile()
+    if comments_form.validate_on_submit():       
 
-    if form.validate_on_submit():
-        user.bio = form.bio.data
+        # Updated comment instance
+        new_comment = Comment(body = comments_form.body.data)
 
-        db.session.add(user)
-        db.session.commit()
+        # Save review method
+        new_comment.save_comment()
 
-        return redirect(url_for('main.profile', uname = user.username))
-
-    return render_template('profile/update.html', form = form)
+        return redirect(url_for('main.comments'))
+    
+    return render_template('comments.html', comments_form = comments_form, comments = comments)

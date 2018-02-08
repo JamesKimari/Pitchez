@@ -1,0 +1,36 @@
+{% extends 'base.html' %} {% import 'bootstrap/wtf.html' as wtf %} {% import 'macros.html' as macro %} {% block body %}
+
+<style>
+    .container-fluid {
+        margin-top: 5%;
+    }
+
+    #column_two {
+        margin-left: 10%;
+    }
+
+    .btn {
+        background-color: white;
+        border: 1px solid dodgerblue;
+        color: dodgerblue;
+        margin: 3.5% 0%;
+    }
+</style>
+
+<div class="container-fluid">
+    <div class="row">
+
+        <div class="col-md-4 col-sm-4 col-xs-4" id="column_one">
+            <div class="container" style = "background-color: white; padding: 5%; margin-left: 3%; color: black;">
+                {{wtf.quick_form(comments_form)}}
+            </div>
+        </div>
+
+        <div class="col-md-6 col-sm-6 col-xs-6" id="column_two">
+            {{macro.displayCommentsList(comments)}}
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}
