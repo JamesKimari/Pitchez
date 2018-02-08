@@ -7,23 +7,26 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Pitchez</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" />  
+    <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
 </head>
+
+<style>
+    body {
+        background-color: rgba(211, 211, 211, 0.3)
+    }
+</style>
 
 <body>
     
-    {% include 'navbar.html' %}
-
-    <div class="container-fluid">
+    {% include 'navbar.html' %}   
 
             {% block body %} 
     
-            {% endblock %}
-
-    </div>
+            {% endblock %}    
     
     <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"></script>  
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"></script>      
 
 </body>
 

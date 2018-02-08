@@ -1,13 +1,72 @@
-{% extends 'base.html' %} 
+{% extends 'base.html' %} {% import 'macros.html' as macro %} {% block body %}
 
-{% import 'macros.html' as macro %}
+<style>
+  .tab {
+    border-right: 1.5px solid rgba(211, 211, 211, 0.5);    
+  }
+</style>
 
-{% block body %}
+<ul class="nav nav-tabs nav-justified" role="tablist">
+  <li class="nav-item">
+    <a class="nav-link active" data-toggle="tab" href="#General" role="tab">General</a>
+  </li>
+  <li class="nav-item tab">
+    <a class="nav-link" data-toggle="tab" href="#Products" role="tab">Products</a>
+  </li>
+  <li class="nav-item tab">
+    <a class="nav-link" data-toggle="tab" href="#Pickups" role="tab">Pickup Lines</a>
+  </li>
+  <li class="nav-item tab">
+    <a class="nav-link" data-toggle="tab" href="#Interviews" role="tab">Interviews</a>
+  </li>
+  <li class="nav-item tab">
+    <a class="nav-link" data-toggle="tab" href="#Promotions" role="tab">Promotions</a>
+  </li>
+</ul>
 
-<a href="{{url_for('main.new_pitch')}}">Create a new Pitch</a>
-
-    <div style="margin-top: 1em;" class="row">
-        {{macro.displayPitchList(pitches)}}
+<div class="tab-content">
+  <div style="margin-top: 1em;" class="tab-pane active" id="General" role="tabpanel">
+    <div class="container-fluid" style="margin: 0% 2%">
+      <div class="row">
+        {{macro.displayPitchList(general)}}
+      </div>
     </div>
+  </div>
+  <div style="margin-top: 1em;" class="tab-pane" id="Products" role="tabpanel">
+    <div class="container-fluid" style="margin: 0% 2%">
+      <div class="row">
+        {{macro.displayPitchList(product_pitch)}}
+      </div>
+    </div>
+  </div>
+  <div style="margin-top: 1em;" class="tab-pane" id="Pickups" role="tabpanel">
+    <div class="container-fluid" style="margin: 0% 2%">
+      <div class="row">
+        {{macro.displayPitchList(pickup_lines)}}
+      </div>
+    </div>
+  </div>
+  <div style="margin-top: 1em;" class="tab-pane" id="Interviews" role="tabpanel">
+    <div class="container-fluid" style="margin: 0% 2%">
+      <div class="row">
+        {{macro.displayPitchList(interview_pitch)}}
+      </div>
+    </div>
+  </div>
+  <div style="margin-top: 1em;" class="tab-pane" id="Promotions" role="tabpanel">
+    <div class="container-fluid" style="margin: 0% 2%">
+      <div class="row">
+        {{macro.displayPitchList(promotion_pitch)}}
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .nav-tabs {
+    background-color: white;
+    box-shadow: 2px 2px rgba(169, 169, 169, 0.2);
+  }
+</style>
 
 {% endblock %}
