@@ -1,20 +1,22 @@
 {% macro displayPitchList(pitch_list) %} {% for pitch in pitch_list %}
 
-<div class="col-md-3 col-sm-6 col-xs-6" id = 'pitch'>
+<div class="col-md-3 col-sm-6 col-xs-6" id='pitch'>
     <div class="card">
         <div class="card-header">{{pitch.category}}</div>
         <div class="card-body">
-            <h5 class="card-title">{{pitch.id}}. {{pitch.title}}</h5>
-            <p class="card-text"><i>{{pitch.pitch_content}}</i></p>
+            <h5 class="card-title" style="color: rgba(0, 0, 0, 0.7);">{{pitch.title}}</h5>
+            <p class="card-text" style="color: rgb(73, 72, 72);">
+                <i>{{pitch.pitch_content}}</i>
+            </p>
         </div>
         <ul class="list-group list-group-flush">
-            <li class="list-group-item">{{pitch.author}}</li>
+            <li class="list-group-item" style="font-size: 14px; color: dodgerblue;">~ {{pitch.author}}<a href=""><span class="fas fa-thumbs-up"></span></a>&ensp;<a href=""><span class="fas fa-thumbs-down"></span></a>&ensp;<a href=""><span class="fas fa-comments"></span></a>    
+            </li>
             <li class="list-group-item">{{pitch.published_at}}</li>
+            <li class="list-group-item" style="background-color: whitesmoke;">
+                <a href="{{url_for('main.new_pitch')}}" class="new_pitch">
+                    <span id = "new_pitch">Click here to create a new Pitch<span></a></li>
         </ul>
-        <div class="card-body">
-            <a href="#" class="card-link">Card link</a>
-            <a href="#" class="card-link">Another link</a>
-        </div>
     </div>
 </div>
 
@@ -24,7 +26,7 @@
     }
 
     .card-header {
-        background-color: deepskyblue;
+        background-color: #09b4be;
     }
 
     .card {
@@ -32,8 +34,42 @@
     }
 
     #pitch {
-        padding-bottom: 1em;        
+        padding-bottom: 1em;
     }
+
+    .fa-thumbs-up {
+        border: 1px solid dodgerblue;  
+        padding: 2px;     
+        font-size: 18px;
+        border-radius: 5px;
+        margin-left: 2em;
+    }
+
+    .fa-thumbs-down {
+        color: hotpink;
+        border: 1px solid hotpink;
+        font-size: 18px;
+        border-radius: 5px;
+        padding: 2px;
+
+    }
+
+    .fa-comments {
+        color: mediumseagreen;
+        border: 1px solid mediumseagreen;
+        font-size: 18px;
+        border-radius: 5px;
+        padding: 2px;
+    }
+
+    #new_pitch {
+        color: hotpink;
+    }
+
+   .new_pitch:hover {
+        text-decoration-color: dodgerblue;        
+    }
+    
 </style>
 
 {% endfor %} {% endmacro %}
