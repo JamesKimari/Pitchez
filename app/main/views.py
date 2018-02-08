@@ -1,7 +1,7 @@
 from flask import render_template, request, redirect, url_for, abort
 from . import main
 from ..models import User, Pitch
-from .forms import PitchForm, UpdateProfile
+from .forms import PitchForm, UpdateProfile, CommentsForm
 from flask_login import login_required, current_user
 from .. import db, photos
 
@@ -11,12 +11,17 @@ def index():
     """
     View root page function that returns the index page and its data
     """
-    title = 'Pitchez'
-    pitches = Pitch.query.all()
+    title = 'Pitches'
+    general = Pitch.query.all()
+    product_pitch = Pitch.query.filter_by(category = 'Product Pitch').all()
+    pickup_lines = Pitch.query.filter_by(category = 'Pickup Lines').all()
+    interview_pitch = Pitch.query.filter_by(category = 'Interview Pitch').all()
+    promotion_pitch = Pitch.query.filter_by(category = 'Promotion Pitch').all()
 
-    return render_template('index.html', title = title, pitches = pitches)
+    return render_template('index.html', title = title, general = general, product_pitch = product_pitch, pickup_lines = pickup_lines, interview_pitch = interview_pitch, promotion_pitch = promotion_pitch)
 
 @main.route('/user/<uname>')
+@login_required
 def profile(uname):
     user = User.query.filter_by(username = uname).first()
 
@@ -45,7 +50,6 @@ def update_profile(uname):
     return render_template('profile/update.html', form = form)
 
 @main.route('/user/<uname>/update/pic', methods = ['POST'])
-@login_required
 def update_pic(uname):
     user = User.query.filter_by(username = uname).first()
 
@@ -70,4 +74,23 @@ def new_pitch():
         
         return redirect(url_for('main.index'))
     
-    return render_template('new_pitch.html', pitch_form = pitch_form)    
+    return render_template('new_pitch.html', pitch_form = pitch_form)   
+
+@main.route('/login/user/<uname>/comments', methods = ['GET', 'POST'])
+@login_required
+def comments(uname):
+    user = User.query.filter_by(username = uname).first()
+    if user is None:
+        abort(404)
+
+    form = UpdateProfile()
+
+    if form.validate_on_submit():
+        user.bio = form.bio.data
+
+        db.session.add(user)
+        db.session.commit()
+
+        return redirect(url_for('main.profile', uname = user.username))
+
+    return render_template('profile/update.html', form = form)
