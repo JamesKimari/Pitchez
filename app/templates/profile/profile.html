@@ -13,13 +13,13 @@
         }
 
         #column_two {
-            border-left: 1px solid rgba(60, 179, 113, 0.3);
+            border-left: 1px solid rgba(12, 160, 176, 0.5);
             margin-left: 8%;
             padding-left: 5%;
         }
 
         #column_two a {
-            color: mediumseagreen;
+            color: #0ca0b0;
         }
         .container {
             position: absolute;
@@ -88,13 +88,13 @@
         }
 
         #column_two {
-            border-left: 1px solid rgba(60, 179, 113, 0.3);
+            border-left: 1px solid rgba(12, 160, 176, 0.5);
             margin-left: 8%;
             padding-left: 5%;
         }
 
         #column_two a {
-            color: mediumseagreen;
+            color: #0ca0b0;
         }
 
         .container {
@@ -122,22 +122,39 @@
             margin: 3.5% 0%;
         }
     }
+
+    img {        
+        border-radius: 50%;
+        border-right: 3px solid #0ca0b0;
+        border-bottom: 3px solid #0ca0b0;
+        height: 110.97px;
+        width: 110.97px;
+        margin-bottom: 4%;
+    }
 </style>
 
 <div class="container-fluid">
     <div class="container">
         <div class="row">
             <div class="col-md-4 col-sm-4 col-xs-4">
+
                 {% if user.profile_pic_path %}
 
-                <img src="{{url_for('static', filename = user.profile_pic_path)}}" alt="" class="img-thumbnail img-responsive"> {% else %}
+                <img src="{{url_for('static', filename = user.profile_pic_path)}}" alt="" class="img-responsive"> 
+                
+                {% else %}
 
-                <img src="{{url_for('static', filename = 'imgs/avatar.png')}}" alt="" class="img-thumbnail img-responsive"> {% endif %} {% if user == current_user %}
+                <img src="{{url_for('static', filename = 'imgs/avatar.png')}}" alt="" class="img-thumbnail"> 
+                
+                {% endif %} {% if user == current_user %}
+
                 <form action="{{url_for('main.update_pic', uname = user.username)}}" method='post' enctype='multipart/form-data'>
                     <input type="file" name="photo" class="form-control" required>
                     <input type="submit">
                 </form>
+
                 {% endif %}
+
             </div>
 
             <div class="col-md-6 col-sm-6 col-xs-6" id="column_two">
@@ -149,6 +166,7 @@
                 <p>{{user.username| capitalize}} has no bio</p>
                 {% endif %} {% if user == current_user %}
                 <a href="{{url_for('main.update_profile', uname = user.username)}}">Edit Profile</a>
+
                 {% endif %}
             </div>
         </div>
