@@ -1,6 +1,6 @@
 <style>
-    .navbar {
-        margin-bottom: 1%;
+    .navbar{
+        background: linear-gradient(-45deg, #107994, #08bec6)
     }
 </style>
 
@@ -22,13 +22,24 @@
     </div>
 
     <ul class="nav navbar-nav navbar-right">
-        {% if current_user.is_authenticated %}
+        {% if current_user.is_authenticated and current_user.profile_pic_path is none %}
+        <span class="nav-item" style="height: 42.97px; width: 50.97px;"><a href="{{url_for('main.profile',uname=current_user.username)}}"><img src="{{url_for('static', filename = 'imgs/avatar.png')}}" alt="" style="height: 42.97px; width: 42.97px; border-radius: 50%; border-right: 2.5px solid white; border-bottom: 2.5px solid white"></a></span> 
         <li class="nav-item">
-            <a class="nav-link" href="{{url_for('main.profile',uname=current_user.username)}}">Profile</a>
-        </li>
+                <a class="nav-link" href="{{url_for('main.profile',uname=current_user.username)}}">{{current_user.username}}</a>
+            </li>        
+            <li class="nav-item">
+                <a class="nav-link" href="{{url_for('auth.logout')}}">Signout</a>
+            </li>  
+
+        {% elif current_user.is_authenticated and current_user.profile_pic_path %}
+        <span class="nav-item" style="height: 42.97px; width: 50.97px;"><a href="{{url_for('main.profile',uname=current_user.username)}}"><img src="{{url_for('static', filename = current_user.profile_pic_path)}}" alt="" style="height: 42.97px; width: 42.97px; border-radius: 50%; border-right: 2.5px solid white; border-bottom: 2.5px solid white"></a></span>
+        <li class="nav-item">
+            <a class="nav-link" href="{{url_for('main.profile',uname=current_user.username)}}">{{current_user.username}}</a>
+        </li>        
         <li class="nav-item">
             <a class="nav-link" href="{{url_for('auth.logout')}}">Signout</a>
-        </li>
+        </li>      
+
         {% else %}
         <li class="nav-item">
             <a class="nav-link" href="{{url_for('auth.login')}}">Signin</a>
