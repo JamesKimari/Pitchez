@@ -1,3 +1,3 @@
 export SECRET_KEY='nexttimemseeh'
 
-python manager.py server
+python manage.py server
