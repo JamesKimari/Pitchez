@@ -1,8 +1,8 @@
-"""initialized database
+"""recreated the pitched database
 
-Revision ID: fd3dfae81f83
+Revision ID: f6206d98540c
 Revises: 
-Create Date: 2018-02-11 12:39:48.808083
+Create Date: 2018-02-12 19:21:38.333808
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'fd3dfae81f83'
+revision = 'f6206d98540c'
 down_revision = None
 branch_labels = None
 depends_on = None
